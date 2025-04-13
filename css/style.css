@@ -1,0 +1,15 @@
+* {
+	color: black;
+}
+
+#navbar li a{
+	color: #eee;
+}
+#navbar li:hover a{
+	color: #fff;
+	text-decoration: underline; 
+}
+
+input[name="quantity"] {
+	width: 40px;
+}
