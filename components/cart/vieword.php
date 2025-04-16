@@ -23,7 +23,7 @@ if ($_SESSION['role'] == 'user'|| $_SESSION['role'] == 'admin') {
 	?>
 <div class="container-fluid my-4">
 		<div class="row my-2">
-			<h2>Elite Fashion - Orders</h2>	
+			<h2>My Boutique - Orders</h2>	
 		</div>
 		<table class="table "> 
 		<thead> 

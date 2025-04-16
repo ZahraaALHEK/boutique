@@ -15,7 +15,7 @@ $res = mysqli_query($connection, $ReadSql);
 	
 	<div class="container-fluid my-4">
 		<div class="row my-2">
-			<h2>Shop-Emloyees</h2>	
+			<h2>My Boutique -Emloyees</h2>	
 			<a href="add-emp.php"><button type="button" class="btn btn-primary ml-4 pl-2">Add New</button></a>
 		</div>
 		<table class="table "> 

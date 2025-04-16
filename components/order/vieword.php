@@ -25,7 +25,7 @@ if ( $_SESSION['role'] == 'admin') {
 	?>
 <div class="container-fluid my-4">
 		<div class="row my-2">
-			<h2>Elite Fashion - Orders</h2>	
+			<h2>My Boutique - Orders</h2>	
 		</div>
 		<table class="table "> 
 		<thead> 
@@ -60,7 +60,7 @@ if ( $_SESSION['role'] == 'admin') {
 
 	<div class="container-fluid my-4">
 	<div class="row my-2">
-		<h2>Elite Fashion - Orders</h2>	
+		<h2>My Boutique - Orders</h2>	
 	</div>
 	<table class="table "> 
 	<thead> 
@@ -94,7 +94,7 @@ if ( $_SESSION['role'] == 'admin') {
  else{if($_SESSION['role'] == 'employee'){?>
 	<div class="container-fluid my-4">
 		<div class="row my-2">
-			<h2>Elite Fashion - Orders</h2>	
+			<h2>My Boutique - Orders</h2>	
 		</div>
 		<table class="table "> 
 		<thead> 
