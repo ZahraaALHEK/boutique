@@ -13,8 +13,19 @@ session_start();
    $address=$_POST['address'];
   include('boutique/vieword.php');
 $insert="INSERT INTO `orders` (u_id,u_name,u_contact,u_address) VALUES ('$u_id', '$username', '$contact','$address')";
-   mysqli_query($connection ,$insert);
+   
+if (mysqli_query($connection ,$insert)) {
+   $query = "DELETE FROM addcart";
+$result = mysqli_query($connection, $query);
+
+if ($result) {
    header('location: vieword.php');
+} else {
+    echo "Error deleting records: " . mysqli_error($connection);
+}
+}
+
+   
 
 
 

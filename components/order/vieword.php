@@ -10,16 +10,18 @@ session_start();
 
 if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'employee' ) {
 	$ReadSql = "SELECT * FROM `orders`";
-	# code...
+
+	
 }else{
 	$u_id = $_SESSION['id'];
-	$ReadSql = "SELECT * FROM `orders` WHERE u_id='$u_id'";
+	$ReadSql = "SELECT * FROM `orders` WHERE u_id = '$u_id'";
+
 }
 $res = mysqli_query($connection, $ReadSql);
 
 ?>
 <?php require($path . 'templates/header.php');
-if ($_SESSION['role'] == 'buyer'|| $_SESSION['role'] == 'admin') {
+if ( $_SESSION['role'] == 'admin') {
 	?>
 <div class="container-fluid my-4">
 		<div class="row my-2">
@@ -28,7 +30,9 @@ if ($_SESSION['role'] == 'buyer'|| $_SESSION['role'] == 'admin') {
 		<table class="table "> 
 		<thead> 
 			<tr> 
-				<th>User Contact</th> 
+				<th>Customer Id</th>
+				<th>Customer  Name</th>
+				<th>Customer  Contact</th> 
 				<th>Delivery Address</th> 
 				<th>Status</th>
 			</tr> 
@@ -39,7 +43,8 @@ if ($_SESSION['role'] == 'buyer'|| $_SESSION['role'] == 'admin') {
 		while($r = mysqli_fetch_assoc($res)){
 		?>
 			<tr> 
-				
+				<td><?php echo $r['u_id'];?></td>
+				<td><?php  echo $r['u_name']  ?></td>
 				<td><?php echo $r['u_contact']; ?></td>
 				<td><?php echo $r['u_address']; ?></td> 
 			<td><?php if($r['o_status']==0){$n='Picking';}else if($r['o_status']==1){$n='Packing';}else if($r['o_status']==2){$n='Shipping';}else $n='Delivered';
@@ -50,7 +55,43 @@ if ($_SESSION['role'] == 'buyer'|| $_SESSION['role'] == 'admin') {
 		</tbody> 
 		</table>
 	</div>  
-<?php }else{if($_SESSION['role'] == 'employee'){?>
+<?php }elseif ($_SESSION['role'] == 'user') {
+	?>
+
+	<div class="container-fluid my-4">
+	<div class="row my-2">
+		<h2>Elite Fashion - Orders</h2>	
+	</div>
+	<table class="table "> 
+	<thead> 
+		<tr> 
+			
+			<th>Customer  Contact</th> 
+			<th>Delivery Address</th> 
+			<th>Status</th>
+		</tr> 
+	</thead> 
+	<tbody> 
+	<?php 
+	
+	while($r = mysqli_fetch_assoc($res)){
+	?>
+		<tr> 
+			
+			<td><?php echo $r['u_contact']; ?></td>
+			<td><?php echo $r['u_address']; ?></td> 
+		<td><?php if($r['o_status']==0){$n='canelled';}else if($r['o_status']==1){$n='pending';}else if($r['o_status']==2){$n='Shipping';}else $n='Delivered';
+			echo $n; ?></td>
+			
+		</tr> 
+	<?php } ?>
+	</tbody> 
+	</table>
+</div> 
+
+<?php
+}
+ else{if($_SESSION['role'] == 'employee'){?>
 	<div class="container-fluid my-4">
 		<div class="row my-2">
 			<h2>Elite Fashion - Orders</h2>	
@@ -75,7 +116,8 @@ if ($_SESSION['role'] == 'buyer'|| $_SESSION['role'] == 'admin') {
 				<td><?php echo $r['u_name']; ?></td> 			
 				<td><?php echo $r['u_contact']; ?></td>
 				<td><?php echo $r['u_address']; ?></td> 
-				<td><?php echo $r['o_status']; ?>
+				<td><?php  if($r['o_status']==0){$n='canelled';}else if($r['o_status']==1){$n='pending';}else if($r['o_status']==2){$n='Shipping';}else $n='Delivered';
+			echo $n;  ?>
 				<button type="button" class="btn btn-warning"><a href="update.php?id=<?php echo $r['id']; ?>">Edit</a></button>
 				
 				<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal<?php echo $r['id']; ?>">Delete</button>

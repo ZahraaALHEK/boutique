@@ -5,20 +5,6 @@ SET AUTOCOMMIT = 0;
 SET time_zone = "+00:00";
 
 
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `u_id` int(8) NOT NULL,
-  `u_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `u_address` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `u_contact` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
-  `o_status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0=canelled, 1= pending, 2 =  shipping, 3 =  delivered',
-  PRIMARY KEY (`id`),
-  KEY `u_id` (`u_id`),
-  KEY `u_name` (`u_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -40,15 +26,6 @@ INSERT INTO `products` (`id`, `name`, `brand`, `price`, `detail`, `img`) VALUES
 (8, 'Beast Product', 'sdaf', 3234, 'adfaf', 'goldwatch.jpg'),
 (9, 'Yellow TSHirt', 'ello', 345, 'This color suits the dirty fellows', 'yellowt.jpg'),
 (10, 'Men White T-Shirt with print', 'Adidas', 782, 'smooth and quality clothes', 'tshirt.jpg');
-
-CREATE TABLE IF NOT EXISTS `addcart` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `u_id` int(11) NOT NULL,
-  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `price` int(32) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -88,6 +65,30 @@ INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `role`) VALUES
 (3, 'hala', '$2y$10$xJVDq3HjKeYFd3jqJU6XTuxXtjaK5sVYVtYE4BM4vh.UJpPC9JI6.', '2023-02-16 05:44:14', 'employee');
 
 INSERT INTO `employee` (`id`, `u_id`, `salary`) VALUES ('1', '3', '0');
+
+CREATE TABLE IF NOT EXISTS `addcart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `u_id` int(11) NOT NULL,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `price` int(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `u_id` int(8) NOT NULL,
+  `u_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `u_address` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `u_contact` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `o_status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0=canelled, 1= pending, 2 =  shipping, 3 =  delivered',
+  PRIMARY KEY (`id`),
+  KEY `u_id` (`u_id`),
+  KEY `u_name` (`u_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 
 ALTER TABLE `orders`

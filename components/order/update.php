@@ -26,7 +26,13 @@ if(isset($_POST) & !empty($_POST)){
 		<form method="post" >
             <div class="form-group">
                 <label>Status : </label>
-				<input type="text" class="form-control" name="o_status" value="<?php echo $r['o_status']; ?>"/>
+<br>
+				<select name="o_status" id="o_status" class="m-3" >
+            <option value="1">pending</option>
+            <option value="2">shipping</option>
+            <option value="3">delivered</option>
+            	</select>
+<br>
 			<input type="submit" class="btn btn-primary" value="Update" />
 		</form>
 	</div>

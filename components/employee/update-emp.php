@@ -21,10 +21,26 @@ if(isset($_POST) & !empty($_POST)){
 	
 
     // Execute query
-	$query = "UPDATE `employee` SET id='$id', username='$name', salary='$salary' WHERE id='$id'";
+	$query = "UPDATE `employee` SET  username='$name', salary='$salary' WHERE id='$id'";
 	
+$query1 = "SELECT u_id FROM employee WHERE id = '$id'";
+$result = mysqli_query($connection, $query1);
+
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $u_id = $row['u_id']; // Retrieved u_id
+    echo "User ID (u_id): " . $u_id;
+} else {
+    echo "No employee found with ID: " . $id;
+}
+
+
+	$query2 = "UPDATE `users` SET  username='$name' WHERE id='$u_id'";
 	$res = mysqli_query($connection, $query);
-	if($res){
+	$res2 = mysqli_query($connection, $query2);
+
+	if($res2 && $res){
 		header('location: viewempl.php');
 	}else{
 		$fmsg = "Failed to Insert data.";
@@ -39,10 +55,11 @@ if(isset($_POST) & !empty($_POST)){
 	<?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> <?php echo $fmsg; ?> </div><?php } ?>
 		<h2 class="my-4">Add New employee</h2>
 		<form method="post" enctype="multipart/form-data">
-			<div class="form-group">
-                <label>id</label>
-				<input type="text" class="form-control" name="id" value="<?php echo $r['id'];?>" required/>
-            </div> 
+			
+			
+                
+				 <input type="hidden" class="form-control" name="id" value="<?php  echo $r['id'];?>" /> 
+            
             <div class="form-group">
                 <label>name</label>
 				<input type="text" class="form-control" name="username" value="<?php echo $r['username'];?>"/>

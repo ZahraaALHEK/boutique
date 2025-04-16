@@ -19,7 +19,7 @@ $res = mysqli_query($connection, $ReadSql);
 
 ?>
 <?php require($path . 'templates/header.php');
-if ($_SESSION['role'] == 'buyer'|| $_SESSION['role'] == 'admin') {
+if ($_SESSION['role'] == 'user'|| $_SESSION['role'] == 'admin') {
 	?>
 <div class="container-fluid my-4">
 		<div class="row my-2">

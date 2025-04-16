@@ -1,55 +1,49 @@
 
 
-<!DOCTYPE html>
 
 
-<html lang="en">
-<head>
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-    <title>my cart</title>
-</head>
-<body>
 <?php 
 session_start();
  
-
+$path = $_SERVER['DOCUMENT_ROOT'];
+$path .= "/boutique/";
 include('connect.php');
 $u_id=$_SESSION["id"];
+require($path . 'templates/header.php');
 $up=mysqli_query($connection,"SELECT * FROM `addcart` WHERE u_id=$u_id ");
-//add where id=u_id for show the cart in selected user
-while($data=mysqli_fetch_array($up)){
+?>
 
-echo "
-<center>
-    <main>
+    
         <table class='table'>
-            <thead>
+            
                 <tr>
                     <th scope='col'>name product</th>
                     <th scope='col'>price product</th>
                     <th scope='col'>delete product</th>
                 </tr>
-            </thead>
-            <tbody>
+           
+            
+<?php
+
+//add where id=u_id for show the cart in selected user
+while($data=mysqli_fetch_array($up)){
+
+echo "
+
                 <tr>
                     <td> $data[name] </td>
-                    <td> < $data[price]   </td>
+                    <td>  $data[price]   </td>
                     <td> <a href='delcart.php?  id= $data[id]' class='btn btn-danger'>delete</a></td>
                 </tr>
-            </tbody>
+           
 
-        </table>
+       
         
-    </main>
-</center>"
+    
+"
 
 ;}
-?>
+?> </table>
 <?php 
 $sql = "SELECT SUM(price) as total_price FROM addcart  WHERE u_id=$u_id";
 $result = mysqli_query($connection, $sql);

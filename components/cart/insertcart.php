@@ -29,5 +29,6 @@ $u_id=$_SESSION["id"] ;
     $_SESSION['price'] = $price;
  $insert="INSERT INTO `addcart` (id,u_id,name, price) VALUES ('$id','$u_id' ,'$name', '$price')";
 mysqli_query($connection ,$insert);
+
 header('location: card.php');
 ?>
